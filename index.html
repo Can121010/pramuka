@@ -1,0 +1,467 @@
+html_content = r"""<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ulang Tahun Pramuka – Situs Edukatif & Perayaan</title>
+  <meta name="description" content="Website satu halaman bertema ulang tahun Pramuka: sejarah singkat, Tri Satya, Dasa Dharma, tingkatan, kegiatan, jadwal perayaan, galeri, dan buku tamu.">
+  <meta name="theme-color" content="#7c2d12">
+  <style>
+    :root {
+      --c-bg: #fff8f0;
+      --c-paper: #fffdf8;
+      --c-primary: #8b4513;
+      --c-primary-2: #a0522d;
+      --c-accent: #0ea5e9;
+      --c-forest: #14532d;
+      --c-scout: #7c2d12;
+      --c-ink: #1f2937;
+    }
+    /* Reset & base */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: var(--c-ink); background: var(--c-bg); }
+    img { max-width: 100%; display: block; }
+    a { color: var(--c-accent); text-decoration: none; }
+    h1,h2,h3 { line-height: 1.2; margin: 0 0 .5rem; }
+    p { line-height: 1.7; margin: 0 0 1rem; }
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+    .btn {
+      display: inline-block; padding: .8rem 1.2rem; border-radius: 999px;
+      background: linear-gradient(135deg, var(--c-scout), var(--c-primary-2));
+      color: white; font-weight: 700; border: 0; cursor: pointer; box-shadow: 0 8px 20px rgba(0,0,0,.15);
+      transition: transform .15s ease, box-shadow .15s ease, opacity .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,0,0,.18); }
+    .btn:active { transform: translateY(0); box-shadow: 0 6px 16px rgba(0,0,0,.14); }
+    .tag { display: inline-block; padding: .25rem .7rem; border: 1px dashed #cdb09a; background: #fff; border-radius: .5rem; font-size: .85rem; color: #6b4f3a; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 5rem 0 4rem;
+      background:
+        radial-gradient(1200px 400px at 20% -10%, rgba(14,165,233,.15), transparent 60%),
+        radial-gradient(900px 300px at 90% 10%, rgba(20,83,45,.12), transparent 60%),
+        linear-gradient(180deg, #fffdfa, #fff5ea);
+      overflow: clip;
+      border-bottom: 1px solid #f3e7db;
+    }
+    .rope {
+      position: absolute; inset: 0 0 auto 0; height: 140px; pointer-events: none; opacity: .5;
+      background:
+        repeating-linear-gradient(105deg, #c48b60 0 6px, #b77a50 6px 12px);
+      -webkit-mask: radial-gradient(60px 60px at 20% 100%, transparent 98%, black),
+                   radial-gradient(40px 40px at 40% 100%, transparent 98%, black),
+                   radial-gradient(70px 70px at 60% 100%, transparent 98%, black),
+                   radial-gradient(50px 50px at 80% 100%, transparent 98%, black);
+      mask: radial-gradient(60px 60px at 20% 100%, transparent 98%, black),
+            radial-gradient(40px 40px at 40% 100%, transparent 98%, black),
+            radial-gradient(70px 70px at 60% 100%, transparent 98%, black),
+            radial-gradient(50px 50px at 80% 100%, transparent 98%, black);
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+    .hero-card {
+      background: var(--c-paper);
+      border: 1px solid #f1e7dc;
+      border-radius: 1.25rem;
+      padding: 1.25rem;
+      box-shadow: 0 10px 30px rgba(139,69,19,.10);
+    }
+    .hero h1 { font-size: clamp(2rem, 4vw, 3rem); }
+    .hero p.lead { font-size: clamp(1rem, 2vw, 1.2rem); color: #5b4636; }
+
+    /* Sections */
+    section { padding: 3rem 0; }
+    .section-title { font-size: clamp(1.4rem, 2.8vw, 2rem); margin-bottom: .75rem; }
+    .section-sub { color: #6b4f3a; margin-bottom: 1.25rem; }
+
+    .grid { display: grid; gap: 1rem; }
+    .g-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .g-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .card {
+      background: var(--c-paper);
+      border: 1px solid #f0e4d8;
+      border-radius: 1rem;
+      padding: 1rem 1.1rem;
+      box-shadow: 0 8px 22px rgba(0,0,0,.06);
+    }
+    .muted { color: #6b4f3a; }
+    .list { margin: .25rem 0 0; padding-left: 1.1rem; }
+    .list li { margin: .25rem 0; }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 1rem; }
+    .timeline::before {
+      content: ""; position: absolute; left: .4rem; top: .2rem; bottom: .2rem; width: 3px;
+      background: linear-gradient(var(--c-accent), transparent);
+      border-radius: 2px;
+    }
+    .t-item { position: relative; padding-left: 1rem; margin: .75rem 0; }
+    .t-item::before {
+      content: ""; position: absolute; left: -.15rem; top: .4rem; width: 12px; height: 12px; border-radius: 50%;
+      background: var(--c-accent); box-shadow: 0 0 0 3px #dff3fd;
+    }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: .7rem .6rem; border-bottom: 1px dashed #e9dac9; text-align: left; }
+    th { background: #fff; position: sticky; top: 0; }
+
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: .75rem; }
+    .tile {
+      aspect-ratio: 4/3; border-radius: .9rem; border: 1px solid #f0e4d8; background: #fff;
+      display: grid; place-items: center; padding: .5rem; box-shadow: inset 0 0 0 6px #fffdf8;
+    }
+    .tile svg { width: 70%; height: 70%; }
+
+    /* Form */
+    form { display: grid; gap: .75rem; }
+    input, textarea, select {
+      width: 100%; padding: .75rem .9rem; border: 1px solid #e8d9c9; border-radius: .7rem; background: #fff;
+      font: inherit; outline: none;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--c-accent); box-shadow: 0 0 0 4px #e0f2fe; }
+    .pill { display: inline-flex; align-items: center; gap: .5rem; background: #fff; border: 1px solid #e8d9c9; border-radius: 999px; padding: .35rem .7rem; }
+    .badge { font-size: .8rem; padding: .2rem .5rem; background: #eef7ff; border: 1px solid #dbeafe; border-radius: .4rem; }
+    .footer { text-align: center; padding: 2rem 0 3rem; color: #6b4f3a; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .g-3 { grid-template-columns: 1fr; }
+      .g-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero" id="home">
+    <div class="rope"></div>
+    <div class="container">
+      <div class="hero-card">
+        <span class="tag">14 Agustus – Hari Pramuka Indonesia</span>
+        <h1>Selamat Ulang Tahun <span style="color:var(--c-scout)">Pramuka</span> ke-<span id="usia">64</span>!</h1>
+        <p class="lead">Mari rayakan semangat <strong>Trisatya</strong> dan <strong>Dasa Dharma</strong>—membentuk generasi tangguh, mandiri, dan berakhlak mulia.</p>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1rem">
+          <a class="btn" href="#tentang">Pelajari Tentang Pramuka</a>
+          <a class="pill" href="#acara">⏳ <span id="countdown">Memuat hitung mundur...</span></a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="tentang">
+      <div class="container grid g-2" style="align-items:start">
+        <div>
+          <h2 class="section-title">Apa itu Pramuka?</h2>
+          <p><strong>Gerakan Pramuka</strong> adalah organisasi pendidikan nonformal yang membina kaum muda agar berkarakter, berpengetahuan, terampil, dan berbakti kepada masyarakat. Di Indonesia, Gerakan Pramuka diresmikan pada <strong>14 Agustus 1961</strong>.</p>
+          <div class="card">
+            <h3>Tujuan & Nilai</h3>
+            <ul class="list">
+              <li>Membentuk manusia berkepribadian mulia dan berkecakapan hidup (life skills).</li>
+              <li>Menumbuhkan kepemimpinan, kerja sama tim, dan kepedulian sosial.</li>
+              <li>Menanamkan cinta tanah air, kedisiplinan, serta kemandirian.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Trisatya (Janji Pramuka)</h3>
+            <ol class="list">
+              <li>Menjalankan kewajiban terhadap Tuhan Yang Maha Esa, Negara Kesatuan Republik Indonesia, dan mengamalkan Pancasila.</li>
+              <li>Menolong sesama hidup dan ikut serta membangun masyarakat.</li>
+              <li>Menepati Dasa Dharma.</li>
+            </ol>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <h3>Dasa Dharma Pramuka</h3>
+            <ol class="list">
+              <li>Takwa kepada Tuhan Yang Maha Esa</li>
+              <li>Cinta alam dan kasih sayang sesama manusia</li>
+              <li>Patriot yang sopan dan kesatria</li>
+              <li>Patuh dan suka bermusyawarah</li>
+              <li>Rela menolong dan tabah</li>
+              <li>Rajin, terampil, dan gembira</li>
+              <li>Hemat, cermat, dan bersahaja</li>
+              <li>Disiplin, berani, dan setia</li>
+              <li>Bertanggung jawab dan dapat dipercaya</li>
+              <li>Suci dalam pikiran, perkataan, dan perbuatan</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Tingkatan (Golongan)</h3>
+            <ul class="list">
+              <li><strong>Siaga</strong> (7–10 th)</li>
+              <li><strong>Penggalang</strong> (11–15 th)</li>
+              <li><strong>Penegak</strong> (16–20 th)</li>
+              <li><strong>Pandega</strong> (21–25 th)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="materi">
+      <div class="container">
+        <h2 class="section-title">Isi Materi Pramuka</h2>
+        <p class="section-sub">Beberapa materi dasar yang umum dipelajari dalam kegiatan kepramukaan.</p>
+        <div class="grid g-3">
+          <div class="card">
+            <h3>Sandi & Tali-Temali</h3>
+            <p>Belajar <em>sandi morse</em>, <em>sandi semaphore</em>, serta simpul (mati, anyam, pangkal, jangkar, clove hitch) dan ikatan (pionering).</p>
+          </div>
+          <div class="card">
+            <h3>Orientasi Lapangan</h3>
+            <p>Kompas, peta medan, <em>tracking</em>, tanda jejak, P3K dasar, serta manajemen risiko kegiatan alam.</p>
+          </div>
+          <div class="card">
+            <h3>Keterampilan Hidup</h3>
+            <p>Kepemimpinan, <em>problem solving</em>, komunikasi, keuangan sederhana, kewirausahaan, & pengabdian masyarakat.</p>
+          </div>
+          <div class="card">
+            <h3>Peraturan Baris-Berbaris</h3>
+            <p>Disiplin, kekompakan, dan ketangkasan melalui latihan baris-berbaris (PBB).</p>
+          </div>
+          <div class="card">
+            <h3>Lingkungan & Kemah</h3>
+            <p>Etika berkemah, konservasi, <em>leave no trace</em>, memasak lapangan, hingga <em>campfire</em>.</p>
+          </div>
+          <div class="card">
+            <h3>TKU & TKK</h3>
+            <p><strong>Tanda Kecakapan Umum</strong> & <strong>Tanda Kecakapan Khusus</strong> sebagai pengakuan atas kemampuan yang dicapai.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="acara">
+      <div class="container">
+        <h2 class="section-title">Perayaan Ulang Tahun Pramuka</h2>
+        <p class="section-sub">Hitung mundur menuju 14 Agustus (Hari Pramuka). Tambahkan jadwal kegiatanmu di bawah.</p>
+        <div class="grid g-2">
+          <div class="card">
+            <h3>Hitung Mundur</h3>
+            <p class="muted">Menuju peringatan Hari Pramuka:</p>
+            <p class="pill">⏳ <span id="cdays">0</span> hari • <span id="chours">0</span> jam • <span id="cmins">0</span> menit • <span id="csecs">0</span> detik</p>
+            <p id="afterday" class="badge" style="display:none">Selamat Hari Pramuka! 🌟</p>
+          </div>
+          <div class="card">
+            <h3>Agenda Kegiatan</h3>
+            <table>
+              <thead>
+                <tr><th>Waktu</th><th>Kegiatan</th><th>Penanggung Jawab</th></tr>
+              </thead>
+              <tbody id="agenda-body">
+                <tr><td>07.00</td><td>Apel Pagi & Upacara</td><td>Dewan Ambalan</td></tr>
+                <tr><td>09.00</td><td>Lomba Pionering</td><td>Bindamping</td></tr>
+                <tr><td>13.30</td><td>Wide Game & Jelajah</td><td>Panitia Kegiatan</td></tr>
+                <tr><td>19.00</td><td>Api Unggun & Pentas Seni</td><td>Sie Acara</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sejarah">
+      <div class="container grid g-2">
+        <div class="card">
+          <h3>Sejarah Singkat</h3>
+          <div class="timeline">
+            <div class="t-item"><strong>1907–1912</strong> – Gerakan kepanduan lahir di dunia oleh <em>Lord Baden-Powell</em> di Inggris.</div>
+            <div class="t-item"><strong>1912–1961</strong> – Kepanduan berkembang di Nusantara lewat berbagai organisasi.</div>
+            <div class="t-item"><strong>14 Agustus 1961</strong> – <em>Gerakan Pramuka</em> Indonesia diresmikan. Tanggal ini diperingati sebagai <em>Hari Pramuka</em>.</div>
+            <div class="t-item"><strong>Kini</strong> – Pramuka menjadi wadah pendidikan karakter kaum muda yang relevan dengan tantangan zaman.</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Seragam & Tanda Pengenal</h3>
+          <ul class="list">
+            <li>Kemeja cokelat muda & celana/rok cokelat tua, syal (hasduk) dengan cincin (ring) pramuka.</li>
+            <li>Tanda Pandu Dunia, Tanda Pelantikan, TKK (khusus), & TKU (umum) sesuai syarat-syarat kecakapan.</li>
+            <li>Penggunaan atribut mengikuti ketentuan kwartir setempat.</li>
+          </ul>
+          <p class="muted">Catatan: detail dapat berbeda mengikuti petunjuk teknis terbaru dari Kwartir Nasional/Daerah.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="galeri">
+      <div class="container">
+        <h2 class="section-title">Galeri</h2>
+        <p class="section-sub">Ilustrasi placeholder—gantikan dengan foto kegiatanmu!</p>
+        <div class="gallery">
+          <div class="tile">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a16207"/><stop offset="1" stop-color="#f59e0b"/></linearGradient></defs>
+              <path d="M 100 20 L 170 160 L 30 160 Z" fill="url(#g1)"></path>
+            </svg>
+          </div>
+          <div class="tile">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <circle cx="100" cy="100" r="70" fill="#22c55e"></circle>
+              <rect x="85" y="55" width="30" height="90" rx="5" fill="#166534"></rect>
+            </svg>
+          </div>
+          <div class="tile">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <rect x="20" y="40" width="160" height="120" rx="12" fill="#60a5fa"></rect>
+              <circle cx="60" cy="100" r="25" fill="#1d4ed8"></circle>
+              <circle cx="120" cy="100" r="15" fill="#1d4ed8"></circle>
+            </svg>
+          </div>
+          <div class="tile">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <path d="M30 160 H170 L140 120 L60 120 Z" fill="#22c55e"></path>
+              <path d="M70 120 L100 60 L130 120 Z" fill="#10b981"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="bukutamu">
+      <div class="container grid g-2">
+        <div class="card">
+          <h3>Buku Tamu & Ucapan</h3>
+          <form id="form-ucapan">
+            <div class="grid g-2">
+              <div>
+                <label>Nama</label>
+                <input type="text" name="nama" placeholder="Nama lengkap" required />
+              </div>
+              <div>
+                <label>Golongan</label>
+                <select name="golongan">
+                  <option>Siaga</option><option>Penggalang</option><option>Penegak</option><option>Pandega</option><option>Pembina</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label>Ucapan</label>
+              <textarea name="ucapan" rows="4" placeholder="Tulis ucapan ulang tahun Pramuka..." required></textarea>
+            </div>
+            <button class="btn" type="submit">Kirim Ucapan</button>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Daftar Ucapan</h3>
+          <div id="daftar-ucapan" class="grid" style="gap:.6rem"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <h2 class="section-title">FAQ Singkat</h2>
+        <div class="grid g-2">
+          <div class="card">
+            <h3>Kapan Hari Pramuka?</h3>
+            <p>Setiap <strong>14 Agustus</strong>, memperingati peresmian Gerakan Pramuka pada 1961.</p>
+          </div>
+          <div class="card">
+            <h3>Apa moto Gerakan Pramuka?</h3>
+            <p><em>Satyaku Kudarmakan, Darmaku Kubaktikan</em>—janji untuk berbuat dan mengabdi.</p>
+          </div>
+          <div class="card">
+            <h3>Siapa yang boleh ikut?</h3>
+            <p>Semua peserta didik usia 7–25 tahun (Siaga–Pandega). Dewasa dapat berperan sebagai pembina & andalan.</p>
+          </div>
+          <div class="card">
+            <h3>Apakah ada kurikulum?</h3>
+            <p>Materi mengacu pada SKU (Syarat Kecakapan Umum) & SKK (Syarat Kecakapan Khusus) yang ditetapkan Kwartir.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> Situs Ulang Tahun Pramuka. Dibuat untuk edukasi & perayaan.</p>
+      <p class="muted">Dapat dimodifikasi bebas untuk gugus depan/sekolahmu.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Hitung usia dinamis dari 1961
+    (function(){
+      const now = new Date();
+      const usia = now.getFullYear() - 1961;
+      document.getElementById('usia').textContent = usia;
+      document.getElementById('year').textContent = now.getFullYear();
+    })();
+
+    // Hitung mundur menuju 14 Agustus (tahun berjalan / berikutnya)
+    (function(){
+      const countdownEl = document.getElementById('countdown');
+      const cats = {d: document.getElementById('cdays'), h: document.getElementById('chours'), m: document.getElementById('cmins'), s: document.getElementById('csecs')};
+      const after = document.getElementById('afterday');
+
+      function targetDate() {
+        const now = new Date();
+        const y = now.getFullYear();
+        let t = new Date(y, 7, 14, 0, 0, 0); // 14 Aug (month index 7)
+        if (now > t) t = new Date(y+1, 7, 14, 0, 0, 0);
+        return t;
+      }
+      function tick() {
+        const now = new Date();
+        const t = targetDate();
+        const diff = t - now;
+        if (diff <= 0) {
+          cats.d.textContent = 0; cats.h.textContent = 0; cats.m.textContent = 0; cats.s.textContent = 0;
+          after.style.display = 'inline-block';
+          countdownEl.textContent = 'Hari ini!';
+          return;
+        }
+        const s = Math.floor(diff/1000);
+        const d = Math.floor(s/86400);
+        const h = Math.floor((s%86400)/3600);
+        const m = Math.floor((s%3600)/60);
+        const sc = s%60;
+        cats.d.textContent = d; cats.h.textContent = h; cats.m.textContent = m; cats.s.textContent = sc;
+        countdownEl.textContent = d+' hari lagi';
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+
+    // Buku tamu sederhana (local only)
+    (function(){
+      const form = document.getElementById('form-ucapan');
+      const list = document.getElementById('daftar-ucapan');
+      function el(tag, attrs={}, text='') {
+        const e = document.createElement(tag);
+        Object.assign(e, attrs);
+        if (text) e.textContent = text;
+        return e;
+      }
+      form.addEventListener('submit', function(ev){
+        ev.preventDefault();
+        const data = new FormData(form);
+        const nama = (data.get('nama')||'').toString().trim();
+        const gol = data.get('golongan')||'';
+        const isi = (data.get('ucapan')||'').toString().trim();
+        if (!nama || !isi) return;
+        const card = el('div', {className:'card'});
+        const head = el('div', {className:'pill'});
+        head.append('👤 ', nama, ' • ', gol);
+        const body = el('p'); body.textContent = isi;
+        const time = el('p', {className:'muted'});
+        time.textContent = new Date().toLocaleString('id-ID');
+        card.appendChild(head);
+        card.appendChild(body);
+        card.appendChild(time);
+        list.prepend(card);
+        form.reset();
+      });
+    })();
+  </script>
+</body>
+</html>
+"""
+
+path = "/mnt/data/website-ulang-tahun-pramuka.html"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(html_content)
